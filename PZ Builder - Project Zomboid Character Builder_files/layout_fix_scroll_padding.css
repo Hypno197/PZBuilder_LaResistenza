@@ -1,0 +1,56 @@
+
+/* ===== PZ Builder: panel padding + scroll fix (scoped) ===== */
+/* Load this AFTER the Webflow CSS and any previous overrides */
+
+@media (min-width: 1200px){
+  /* 1) Outer panels should NOT scroll; only the inner list should. */
+  .traits_good,
+  .traits_bad,
+  .traits_selected,
+  .occupation {
+    overflow: visible !important;
+  }
+
+  /* 2) Normalize inner list paddings and scrolling. */
+  .traits_good .div-block-28.small_list,
+  .traits_bad .div-block-28.small_list,
+  .traits_selected .div-block-28.small_list,
+  .occupation .div-block-28.large_list {
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* Keep a consistent viewport-based height so no "mistery" scrollbars appear */
+    max-height: calc(100vh - 260px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 3) Avoid extra negative margins / side gaps inside list items */
+  .traits_good .trait_li,
+  .traits_bad .trait_li,
+  .traits_selected .trait_li,
+  .occupation .occupation_li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* 4) Make sure columns don't introduce horizontal scrollbar */
+  .traits_good, .traits_bad, .traits_selected, .occupation {
+    min-width: 0;  /* important for flex/grid children */
+  }
+}
+
+/* Optional: slim scrollbar look (supported browsers) */
+.traits_good .div-block-28.small_list,
+.traits_bad .div-block-28.small_list,
+.traits_selected .div-block-28.small_list,
+.occupation .div-block-28.large_list {
+  scrollbar-width: thin;
+}
+.traits_good .div-block-28.small_list::-webkit-scrollbar,
+.traits_bad .div-block-28.small_list::-webkit-scrollbar,
+.traits_selected .div-block-28.small_list::-webkit-scrollbar,
+.occupation .div-block-28.large_list::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
